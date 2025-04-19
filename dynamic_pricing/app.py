@@ -3,9 +3,9 @@ import pickle
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 import os
+from flask_cors import CORS
 
 app = Flask(__name__)
-
 
 model_path=os.path.join(os.path.dirname(__file__),'dynamic_pricing.pkl')            #loading model
 with open(model_path, 'rb') as model_file:
@@ -16,6 +16,8 @@ with open(model_path, 'rb') as model_file:
 file_path = os.path.join(os.path.dirname(__file__), 'final_data.csv')           #loading data
 df = pd.read_csv(file_path)
 
+
+CORS(app, origins="http://localhost:5173")
 
 
 label_encoder = LabelEncoder()
