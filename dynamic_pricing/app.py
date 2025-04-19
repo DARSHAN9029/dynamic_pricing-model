@@ -5,10 +5,10 @@ from sklearn.preprocessing import LabelEncoder
 
 app = Flask(__name__)
 
-with open(r'C:\Users\PINKY\OneDrive\Desktop\MiniProject\dynamic pricing\dynamic_pricing.pkl', 'rb') as model_file:
+with open(r'dynamic_pricing\dynamic_pricing.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
-df = pd.read_csv(r'C:\Users\PINKY\OneDrive\Desktop\MiniProject\dynamic pricing\final_data.csv')
+df = pd.read_csv(r'dynamic_pricing\final_data.csv')
 label_encoder = LabelEncoder()
 df['Title_original'] = df['Title']
 df['Title'] = label_encoder.fit_transform(df['Title'])
