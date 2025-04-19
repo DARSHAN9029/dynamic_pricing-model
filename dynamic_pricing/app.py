@@ -2,13 +2,22 @@ from flask import Flask, request, jsonify
 import pickle
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+import os
 
 app = Flask(__name__)
 
-with open(r'dynamic_pricing\dynamic_pricing.pkl', 'rb') as model_file:
+
+model_path=os.path.join(os.path.dirname(__file__),'dynamic_pricing.pkl')            #loading model
+with open(model_path, 'rb') as model_file:
     model = pickle.load(model_file)
 
-df = pd.read_csv(r'dynamic_pricing\final_data.csv')
+
+
+file_path = os.path.join(os.path.dirname(__file__), 'final_data.csv')           #loading data
+df = pd.read_csv(file_path)
+
+
+
 label_encoder = LabelEncoder()
 df['Title_original'] = df['Title']
 df['Title'] = label_encoder.fit_transform(df['Title'])
